@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>民事裁判費退費試算小工具</title>
+    <style>
+        body {
+            font-family: Arial, "Microsoft JhengHei", sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .calculator-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result-container {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .result-container h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 16px;
+        }
+        .result-value {
+            font-size: 24px;
+            color: #28a745;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator-card">
+    <h2>民事裁判費退費試算</h2>
+    
+    <div class="form-group">
+        <label for="paidAmount">已繳納裁判費金額 (元)：</label>
+        <input type="number" id="paidAmount" placeholder="請輸入金額" min="0">
+    </div>
+    
+    <button onclick="calculateRefund()">計算應退費用</button>
+    
+    <div class="result-container">
+        <h3>應退費用 (已繳金額的 2/3，無條件進位)：</h3>
+        <div class="result-value" id="resultValue">0 元</div>
+    </div>
+</div>
+
+<script>
+    function calculateRefund() {
+        const paidInput = document.getElementById('paidAmount').value;
+        const resultDiv = document.getElementById('resultValue');
+
+        // 檢查輸入是否為有效數字
+        const paidAmount = parseFloat(paidInput);
+
+        if (isNaN(paidAmount) || paidAmount < 0) {
+            resultDiv.textContent = "請輸入有效的金額";
+            return;
+        }
+
+        // 計算已繳金額的三分之二
+        const calculated = paidAmount * (2 / 3);
+
+        // 使用 Math.ceil() 進行無條件進位
+        const finalRefund = Math.ceil(calculated);
+
+        // 顯示結果並加上千分位與單位
+        resultDiv.textContent = finalRefund.toLocaleString() + " 元";
+    }
+</script>
+
+</body>
+</html>
