@@ -85,7 +85,7 @@
     
     <div class="form-group">
         <label for="paidAmount">已繳納裁判費金額 (元)：</label>
-        <input type="number" id="paidAmount" placeholder="請輸入金額" min="0" onkeydown="if(event.key === 'Enter'){ event.preventDefault(); calculateRefund(); }">
+        <input type="number" id="paidAmount" placeholder="請輸入金額" min="0" autofocus onkeydown="if(event.key === 'Enter'){ event.preventDefault(); calculateRefund(); }">
     </div>
     
     <button onclick="calculateRefund()">計算應退費用</button>
